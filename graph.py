@@ -1,3 +1,8 @@
+import random, math
+
+def distance(a, b):
+    return math.sqrt((b[0] - a[0])**2 + (b[1] - a[1])**2)
+
 class Graph:
     def __init__(self):
         self.graphDict = {}
@@ -14,6 +19,9 @@ class Graph:
 
         return edges
 
+    def neighbors(self, vertex):
+        return self.graphDict[vertex]
+
     def addVertex(self, vertex):
         if vertex not in self.graphDict:
             self.graphDict[vertex] = []
@@ -22,16 +30,36 @@ class Graph:
         if source in self.graphDict and target in self.graphDict:
             self.graphDict[source].append(target)
 
-graph1 = Graph()
+class KNNGraph(Graph):
+    def __init__(self, v, k):
+        super().__init__()
 
-for i in range(4):
-    graph1.addVertex(i)
+        vertices = []
 
-graph1.addEdge(0, 1)
-graph1.addEdge(0, 2)
-graph1.addEdge(2, 1)
-graph1.addEdge(2, 3)
-graph1.addEdge(3, 2)
+        while len(vertices) < v:
+            vertex = (random.randint(0, v), random.randint(0, v))
+
+            if vertex not in vertices:
+                self.addVertex(vertex)
+                vertices.append(vertex)
+
+        for v in vertices:
+            distances = []
+
+            for v2 in vertices:
+                if v != v2:
+                    distances.append((v2, distance(v, v2)))
+
+            distances.sort(key = lambda x: x[1])
+
+            for i in range(k):
+                self.addEdge(v, distances[i][0])
+
+# graph1 = KNNGraph(7000, 3)
+graph1 = KNNGraph(10, 2)
 
 print(graph1.graphDict)
-print(graph1.edges())
+#print(graph1.vertices())
+#print(graph1.edges())
+
+print(graph1.neighbors(graph1.vertices()[0]))
