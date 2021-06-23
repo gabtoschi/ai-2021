@@ -1,4 +1,5 @@
 import random, math
+from graph_printer import GraphPrinter
 
 def distance(a, b):
     return math.sqrt((b[0] - a[0])**2 + (b[1] - a[1])**2)
@@ -6,6 +7,7 @@ def distance(a, b):
 class Graph:
     def __init__(self):
         self.graphDict = {}
+        self.gPrinter = GraphPrinter()
 
     def vertices(self):
         return list(self.graphDict.keys())
@@ -29,6 +31,9 @@ class Graph:
     def addEdge(self, source, target):
         if source in self.graphDict and target in self.graphDict:
             self.graphDict[source].append(target)
+
+    def print(self):
+        self.gPrinter.print(graph1.edges())
 
 class KNNGraph(Graph):
     def __init__(self, v, k):
@@ -56,10 +61,8 @@ class KNNGraph(Graph):
                 self.addEdge(v, distances[i][0])
 
 # graph1 = KNNGraph(7000, 3)
-# graph1 = KNNGraph(10, 2)
-
+graph1 = KNNGraph(10, 2)
+graph1.print()
 # print(graph1.graphDict)
 #print(graph1.vertices())
 #print(graph1.edges())
-
-# print(graph1.neighbors(graph1.vertices()[0]))
