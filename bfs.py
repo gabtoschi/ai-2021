@@ -13,6 +13,9 @@ def BFS(graph: Graph.Graph, start, end):
     while queue:
         current = queue.pop(0)
 
+        if current == end:
+            break
+
         for v in graph.neighbors(current):
             if v not in visited:
                 queue.append(v)
