@@ -44,5 +44,5 @@ def aStar(graph: Graph.Graph, start, end):
 
     return foundPath
 
-test = Graph.KNNGraph(800, 5)
-print('A* =========', aStar(test, test.vertices()[0], test.vertices()[1]))
+# test = Graph.KNNGraph(800, 5)
+# print('A* =========', aStar(test, test.vertices()[0], test.vertices()[1]))
