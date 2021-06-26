@@ -28,5 +28,35 @@ def DFS(graph: Graph.Graph, start, end):
 
     return foundPath
 
-# test = Graph.KNNGraph(800, 5)
-# print('DFS =========', DFS(test, test.vertices()[0], test.vertices()[1]))
+def DFSIterative(graph: Graph.Graph, start, end):
+    visited = set()
+    visited.add(start)
+
+    parent = dict()
+    parent[start] = None
+
+    stack = [start]
+
+    while stack:
+        current = stack.pop()
+
+        if current == end:
+            break
+
+        for v in graph.neighbors(current):
+            if v not in visited:
+                stack.append(v)
+                visited.add(v)
+                parent[v] = current
+
+    foundPath = []
+    pathCurrent = end
+
+    if end in parent:
+        while pathCurrent != None:
+            foundPath.append(pathCurrent)
+            pathCurrent = parent[pathCurrent]
+
+    foundPath.reverse()
+
+    return foundPath

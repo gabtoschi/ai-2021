@@ -1,7 +1,8 @@
 import sys, time, random
+from typing import DefaultDict
 
 from graph import KNNGraph
-from dfs import DFS
+from dfs import DFSIterative
 from bfs import BFS
 from bestfirst import bestFirst
 from astar import aStar
@@ -14,7 +15,7 @@ if (len(args) < 2):
     exit()
 
 algorithms = {
-    # 'DFS': DFS,
+    'DFS': DFSIterative,
     'BFS': BFS,
     'Best-First': bestFirst,
     'A*': aStar,
