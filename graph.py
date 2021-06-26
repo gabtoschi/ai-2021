@@ -3,6 +3,19 @@ import random, math
 def distance(a, b):
     return math.sqrt((b[0] - a[0])**2 + (b[1] - a[1])**2)
 
+def getPathByParents(parent, end):
+    foundPath = []
+    pathCurrent = end
+
+    if end in parent:
+        while pathCurrent != None:
+            foundPath.append(pathCurrent)
+            pathCurrent = parent[pathCurrent]
+
+    foundPath.reverse()
+
+    return foundPath
+
 class Graph:
     def __init__(self):
         self.graphDict = {}

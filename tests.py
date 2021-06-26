@@ -1,7 +1,7 @@
 import sys, time, random
 from typing import DefaultDict
 
-from graph import KNNGraph
+from graph import KNNGraph, getPathByParents
 from dfs import DFSIterative
 from bfs import BFS
 from bestfirst import bestFirst
@@ -40,11 +40,11 @@ print(file = file)
 
 for algName in algorithms:
     executionTime = 0.0
-    lastPath = None
+    lastParent = None
 
     for exec in range(EXECUTIONS):
         start = time.time()
-        lastPath = algorithms[algName](graph, startNode, endNode)
+        lastParent = algorithms[algName](graph, startNode, endNode)
         end = time.time()
 
         executionTime = executionTime + (end - start)
@@ -52,5 +52,5 @@ for algName in algorithms:
     executionTime = executionTime / EXECUTIONS
 
     print('|', algName, '| Average Time:', executionTime, '|', file = file)
-    print(lastPath, file = file)
+    print(getPathByParents(lastParent, endNode), file = file)
     print(file = file)

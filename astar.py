@@ -32,14 +32,4 @@ def aStar(graph: Graph.Graph, start, end):
                 visited.add(v)
                 parent[v] = current
 
-    foundPath = []
-    pathCurrent = end
-
-    if end in parent:
-        while pathCurrent != None:
-            foundPath.append(pathCurrent)
-            pathCurrent = parent[pathCurrent]
-
-    foundPath.reverse()
-
-    return foundPath
+    return parent
