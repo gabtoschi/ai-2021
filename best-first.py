@@ -11,7 +11,7 @@ def bestFirst(graph: Graph.Graph, start, end):
     queue.put((0, start))
     visited.add(start)
 
-    while queue.empty() == False:
+    while not queue.empty():
         current = queue.get()[1]
 
         if current == end:
