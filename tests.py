@@ -6,6 +6,7 @@ from dfs import DFSIterative
 from bfs import BFS
 from bestfirst import bestFirst
 from astar import aStar
+from amanhattan import aManhattan
 
 EXECUTIONS = 5
 
@@ -19,6 +20,7 @@ algorithms = {
     'BFS': BFS,
     'Best-First': bestFirst,
     'A*': aStar,
+    'A (using Manhattan)': aManhattan,
 }
 
 v = int(args[0])
