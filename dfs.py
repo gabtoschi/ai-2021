@@ -1,4 +1,5 @@
 import graph as Graph
+from graph_printer import GraphPrinter
 
 def DFS(graph: Graph.Graph, start, end):
     visited = set()
@@ -28,5 +29,8 @@ def DFS(graph: Graph.Graph, start, end):
 
     return foundPath
 
-# test = Graph.KNNGraph(800, 5)
-# print('DFS =========', DFS(test, test.vertices()[0], test.vertices()[1]))
+test = Graph.KNNGraph(10, 5)
+# test.print()
+print('DFS =========', DFS(test, test.vertices()[0], test.vertices()[1]))
+gPrinter = GraphPrinter()
+gPrinter.printWay(test.edges(), DFS(test, test.vertices()[0], test.vertices()[1]))

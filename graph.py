@@ -60,9 +60,9 @@ class KNNGraph(Graph):
             for i in range(k):
                 self.addEdge(v, distances[i][0])
 
-# graph1 = KNNGraph(7000, 3)
 graph1 = KNNGraph(10, 2)
-graph1.print()
+# graph1 = KNNGraph(10, 2)
+# graph1.print()
 # print(graph1.graphDict)
 #print(graph1.vertices())
-#print(graph1.edges())
+# print(graph1.edges())
