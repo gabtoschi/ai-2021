@@ -20,7 +20,7 @@ class GraphPrinter:
         figManager.window.showMaximized()
         plt.show()
     
-    def printWay(self, edges, way):
+    def printWay(self, edges, way, path_to_save=None):
         wayAux = []
 
         localOptions = {
@@ -55,4 +55,7 @@ class GraphPrinter:
         figManager.window.showMaximized()
         ppp = plt.plot()
         plt.tight_layout(rect=[0, 0, 1, 0.95])
-        plt.show()
+        if path_to_save:
+            plt.savefig(path_to_save, bbox_inches='tight')
+        else:
+            plt.show()
