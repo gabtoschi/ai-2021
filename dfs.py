@@ -17,20 +17,34 @@ def DFS(graph: Graph.Graph, start, end):
 
     DFSRec(graph, start)
 
-    foundPath = []
-    pathCurrent = end
+    return parent
 
-    if end in parent:
-        while pathCurrent != None:
-            foundPath.append(pathCurrent)
-            pathCurrent = parent[pathCurrent]
+def DFSIterative(graph: Graph.Graph, start, end):
+    visited = set()
+    visited.add(start)
 
-    foundPath.reverse()
+    parent = dict()
+    parent[start] = None
 
-    return foundPath
+    stack = [start]
 
-test = Graph.KNNGraph(10, 5)
+    while stack:
+        current = stack.pop()
+
+        if current == end:
+            break
+
+        for v in graph.neighbors(current):
+            if v not in visited:
+                stack.append(v)
+                visited.add(v)
+                parent[v] = current
+
+    return parent
+
+# test = Graph.KNNGraph(10, 5)
 # test.print()
-print('DFS =========', DFS(test, test.vertices()[0], test.vertices()[1]))
-gPrinter = GraphPrinter()
-gPrinter.printWay(test.edges(), DFS(test, test.vertices()[0], test.vertices()[1]), 'dirr/est.png')
+# print('DFS =========', DFS(test, test.vertices()[0], test.vertices()[1]))
+# gPrinter = GraphPrinter()
+# gPrinter.printWay(test.edges(), DFS(test, test.vertices()[0], test.vertices()[1]), 'dirr/est.png')
+

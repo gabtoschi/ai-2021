@@ -4,6 +4,19 @@ from graph_printer import GraphPrinter
 def distance(a, b):
     return math.sqrt((b[0] - a[0])**2 + (b[1] - a[1])**2)
 
+def getPathByParents(parent, end):
+    foundPath = []
+    pathCurrent = end
+
+    if end in parent:
+        while pathCurrent != None:
+            foundPath.append(pathCurrent)
+            pathCurrent = parent[pathCurrent]
+
+    foundPath.reverse()
+
+    return foundPath
+
 class Graph:
     def __init__(self):
         self.graphDict = {}
@@ -33,7 +46,7 @@ class Graph:
             self.graphDict[source].append(target)
 
     def print(self):
-        self.gPrinter.print(graph1.edges())
+        self.gPrinter.print(self.edges())
 
 class KNNGraph(Graph):
     def __init__(self, v, k):
@@ -60,9 +73,9 @@ class KNNGraph(Graph):
             for i in range(k):
                 self.addEdge(v, distances[i][0])
 
-graph1 = KNNGraph(10, 2)
+# graph1 = KNNGraph(10, 2)
 # graph1 = KNNGraph(10, 2)
 # graph1.print()
 # print(graph1.graphDict)
-#print(graph1.vertices())
+# print(graph1.vertices())
 # print(graph1.edges())

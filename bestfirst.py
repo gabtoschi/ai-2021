@@ -1,24 +1,25 @@
 import graph as Graph
+from queue import PriorityQueue
 
-def BFS(graph: Graph.Graph, start, end):
+def bestFirst(graph: Graph.Graph, start, end):
     visited = set()
 
     parent = dict()
     parent[start] = None
 
-    queue = []
-    queue.append(start)
+    queue = PriorityQueue()
+    queue.put((0, start))
     visited.add(start)
 
-    while queue:
-        current = queue.pop(0)
+    while not queue.empty():
+        current = queue.get()[1]
 
         if current == end:
             break
 
         for v in graph.neighbors(current):
             if v not in visited:
-                queue.append(v)
+                queue.put((Graph.distance(current, v), v))
                 visited.add(v)
                 parent[v] = current
 
