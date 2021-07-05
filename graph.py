@@ -48,6 +48,9 @@ class Graph:
     def print(self):
         self.gPrinter.print(self.edges())
 
+    def printWithPath(self, path, filename):
+        self.gPrinter.printWay(self.edges(), path, filename)
+
 class KNNGraph(Graph):
     def __init__(self, v, k):
         super().__init__()
@@ -73,9 +76,3 @@ class KNNGraph(Graph):
             for i in range(k):
                 self.addEdge(v, distances[i][0])
 
-# graph1 = KNNGraph(10, 2)
-# graph1 = KNNGraph(10, 2)
-# graph1.print()
-# print(graph1.graphDict)
-# print(graph1.vertices())
-# print(graph1.edges())

@@ -1,3 +1,4 @@
+from aeuclidian import aEuclidian
 import sys, time, random
 from typing import DefaultDict
 
@@ -20,7 +21,8 @@ algorithms = {
     'BFS': BFS,
     'Best-First': bestFirst,
     'A*': aStar,
-    'A (using Manhattan)': aManhattan,
+    'A (Manhattan)': aManhattan,
+    'A (10 * Euclidian)': aEuclidian,
 }
 
 v = int(args[0])
@@ -34,7 +36,8 @@ endNode = startNode
 while (startNode == endNode):
     endNode = graph.vertices()[random.randrange(verticesAmount)]
 
-file = open('results/v' + str(v) + '-k' + str(k) + '.dat', 'w')
+filenameBase = 'results/v' + str(v) + '-k' + str(k)
+file = open(filenameBase + '.dat', 'w')
 
 print('| Graph | V =', v, '| K =', k, '|', file = file)
 print('| Start:', startNode, '| End:', endNode, '|', file = file)
@@ -43,6 +46,8 @@ print(file = file)
 for algName in algorithms:
     executionTime = 0.0
     lastParent = None
+
+    print('Start:', algName, 'v =', v, 'k =', k)
 
     for exec in range(EXECUTIONS):
         start = time.time()
@@ -53,6 +58,13 @@ for algName in algorithms:
 
     executionTime = executionTime / EXECUTIONS
 
-    print('|', algName, '| Average Time:', executionTime, '|', file = file)
-    print(getPathByParents(lastParent, endNode), file = file)
+    path = getPathByParents(lastParent, endNode)
+    print(path)
+
+    print('|', algName, '| Average Time:', executionTime, '| Path Length:', len(path), file = file)
+    print(path, file = file)
     print(file = file)
+
+    graph.printWithPath(path, filenameBase + '-' + algName + '.png')
+
+    print('End:', algName, 'v =', v, '| k =', k)
